@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+    <style>
+        body{
+            font-family: Arial;
+            text-align: center;
+            padding: 50px;
+        }
+        #calcolatrice{
+            display: inline-block;
+            padding: 50px;
+            border: 5px solid rgb(5, 0, 14);
+            background-color: rgb(233, 12, 12);
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 42px;
+            text-align: right;
+            font-size: 30px;
+        }
+        button {
+            width: 80px;
+            height: 60px;
+            margin: 5px;
+            font-size: 30px;
+            background-color: rgb(218, 210, 210);
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Calcolatrice Cardamonz</h1>
+    <div id="calcolatrice">
+        <input type="text" id="display" readonly>
+        <br>
+        <button class="operator" onclick="aggiungi('/')">/</button>
+        <button onclick="aggiungi('7')">7</button>
+        <button onclick="aggiungi('8')">8</button>
+        <button onclick="aggiungi('9')">9</button>
+        <br>
+        <br>
+        <button class="operator" onclick="aggiungi('*')">*</button>
+        <button onclick="aggiungi('4')">4</button>
+        <button onclick="aggiungi('5')">5</button>
+        <button onclick="aggiungi('6')">6</button>
+        <br>
+        <br>
+        <button class="operator" onclick="aggiungi('-')">-</button>
+        <button onclick="aggiungi('1')">1</button>
+        <button onclick="aggiungi('2')">2</button>
+        <button onclick="aggiungi('3')">3</button>
+        <br>
+        <br>
+        <button class="operator" onclick="aggiungi('+')">+</button>
+        <button onclick="aggiungi('0')">0</button>
+        <button onclick="aggiungi('.')">.</button>
+        <button class="equal" onclick="calculateResult()">=</button>
+        <br>
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <br>
+    </div>
+    <script>
+        function cancellaUltimoCarattere() {
+        var display = document.getElementById('display');
+        display.value = display.value.slice(0, -1);}
+        function aggiungi(valore){
+
+        let ultimoCarattere = display.value.slice(-1);
+        if( ["+", "-", "*", "/"].includes(ultimoCarattere)  && ["+", "-", "*", "/"].includes(valore)) {
+
+            cancellaUltimoCarattere();
+            document.getElementById('display').value += valore;
+
+            }
+            else
+            {
+            document.getElementById('display').value += valore;
+            }
+        }
+
+        function clearDisplay() {
+        document.getElementById("display").value = "";
+        }
+
+        function calculateResult() {
+        try {
+        document.getElementById("display").value = eval(document.getElementById("display").value);
+        } catch (error) {
+        alert("Errore di calcolo!");
+        clearDisplay();
+        }
+        }
+    </script>
+</body>
+</html>
